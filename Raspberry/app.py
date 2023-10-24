@@ -51,9 +51,9 @@ class ObjectDetection():
             interpreter.invoke()
 
             # Retrieve detection results
-            boxes = interpreter.get_tensor(output_details[0]['index'])
-            classes = interpreter.get_tensor(output_details[1]['index'])
-            scores = interpreter.get_tensor(output_details[2]['index'])
+            boxes = interpreter.get_tensor(output_details[1]['index'])[0]
+            classes = interpreter.get_tensor(output_details[3]['index'])[0]
+            scores = interpreter.get_tensor(output_details[0]['index'])[0]
 
             detections = []
 
