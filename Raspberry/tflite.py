@@ -119,7 +119,7 @@ PATH_TO_MODEL=f'./model/detect.tflite'   # Path to .tflite model file
 
 PATH_TO_LABELS='./model/labelmap.txt'   # Path to labelmap.txt file
 min_conf_threshold=0.5   # Confidence threshold (try changing this to 0.01 if you don't see any detection results)
-images_to_test = 2   # Number of images to run detection on
+images_to_test = 1   # Number of images to run detection on
 
 # Run inferencing function!
 tflite_detect_images(PATH_TO_MODEL, PATH_TO_IMAGES, PATH_TO_LABELS, min_conf_threshold, images_to_test)

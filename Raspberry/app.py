@@ -1,4 +1,4 @@
-from tensorflow.lite.python.interpreter import Interpreter
+from tflite_runtime.interpreter import Interpreter
 import numpy as np
 import cv2
 
@@ -57,6 +57,7 @@ class ObjectDetection():
 
             detections = []
 
+
             # Loop over all detections and draw detection box if confidence is above minimum threshold
             for i in range(len(scores)):
                 if ((scores[i] > min_conf) and (scores[i] <= 1.0)):
@@ -75,14 +76,22 @@ class ObjectDetection():
                     cv2.rectangle(frame, (xmin, label_ymin-labelSize[1]-10), (xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED)
                     cv2.putText(frame, label, (xmin, label_ymin-7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
 
-                    detections.append([object_name, scores[i], xmin, ymin, xmax, ymax])
-
+                    detections.append(object_name.upper())
+            
+            # IF ORGANIK ROTATE SERVO
+            organik = ['AMPAS TEBU', 'RANTING KAYU', 'DAUN', 'KULIT TELUR']
+            if organik in detections:
+                print('ROTATE SERVO')
+                       
             # Show the output frame
-            cv2.imshow('Object Detection', frame)
+            cv2.imshow('KLasifikasi Sampah Organik dan Anorganik', frame)
 
             # Press 'q' to quit
             if cv2.waitKey(1) == ord('q'):
                 break
+            
+            print(detections)
+
 
         # Clean up
         cap.release()
